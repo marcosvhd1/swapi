@@ -19,13 +19,14 @@ import Starship from "../../assets/imgs/Starship.svg";
 import Vehicle from "../../assets/imgs/Vehicle.svg";
 import { Loading } from "../../components/Loading/Loading";
 import { ApiService } from "../../services/Api";
+import { PersonProps } from "../Home/HomePage";
 
 export function DetailsPage() {
   const [specie, setSpecie] = useState<string>("");
   const [homeworld, setHomeworld] = useState<string>("");
-  const [films, setFilms] = useState<any[]>([]);
-  const [vehicles, setVehicles] = useState<any[]>([]);
-  const [starships, setStarships] = useState<any[]>([]);
+  const [films, setFilms] = useState<string[]>([]);
+  const [vehicles, setVehicles] = useState<string[]>([]);
+  const [starships, setStarships] = useState<string[]>([]);
 
   //Pega o personagem selecionado baseado na URL
   const urlName = useLocation().pathname.slice(15);
@@ -36,7 +37,7 @@ export function DetailsPage() {
   });
 
   const person = data?.find(
-    (person: any) => person.name === decodeURI(urlName)
+    (person: PersonProps) => person.name === decodeURI(urlName)
   );
 
   useEffect(() => {
@@ -68,8 +69,8 @@ export function DetailsPage() {
   };
 
   const getFilms = async () => {
-    const promises: any = [];
-    const apiFilms: any = [];
+    const promises: void[] = [];
+    const apiFilms: string[] = [];
 
     if (person) {
       for (const film of person.films) {
@@ -87,8 +88,8 @@ export function DetailsPage() {
   };
 
   const getVehicles = async () => {
-    const promises: any = [];
-    const apiVehicles: any = [];
+    const promises: void[] = [];
+    const apiVehicles: string[] = [];
 
     if (person) {
       for (const vehicle of person.vehicles) {
@@ -104,8 +105,8 @@ export function DetailsPage() {
   };
 
   const getStarships = async () => {
-    const promises: any = [];
-    const apiStarships: any = [];
+    const promises: void[] = [];
+    const apiStarships: string[] = [];
 
     if (person) {
       for (const starship of person.starships) {
@@ -166,7 +167,9 @@ export function DetailsPage() {
                     <img src={Homeworld} alt="icon" height={16} width={16} />
                     HOMEWORLD
                   </p>
-                  <p className="text-sm text-right text-gray-800">{homeworld}</p>
+                  <p className="text-sm text-right text-gray-800">
+                    {homeworld}
+                  </p>
                 </div>
                 <Accordion
                   type="single"
@@ -183,7 +186,7 @@ export function DetailsPage() {
                       </div>
                     </AccordionTrigger>
                     {films.map((film) => (
-                      <AccordionContent className="p-2">
+                      <AccordionContent key={film} className="p-2">
                         {film}
                       </AccordionContent>
                     ))}
@@ -204,7 +207,7 @@ export function DetailsPage() {
                       </div>
                     </AccordionTrigger>
                     {vehicles.map((vehicle) => (
-                      <AccordionContent className="p-2">
+                      <AccordionContent key={vehicle} className="p-2">
                         {vehicle}
                       </AccordionContent>
                     ))}
@@ -225,7 +228,7 @@ export function DetailsPage() {
                       </div>
                     </AccordionTrigger>
                     {starships.map((starship) => (
-                      <AccordionContent className="p-2">
+                      <AccordionContent key={starship} className="p-2">
                         {starship}
                       </AccordionContent>
                     ))}

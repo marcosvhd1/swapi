@@ -1,5 +1,5 @@
 import { useQuery } from "@tanstack/react-query";
-import { useState } from "react";
+import { FormEvent, useState } from "react";
 import { Link, useSearchParams } from "react-router-dom";
 import Card from "../../assets/imgs/Card.svg";
 import Eye from "../../assets/imgs/Eye.svg";
@@ -13,6 +13,16 @@ import { Loading } from "../../components/Loading/Loading";
 import { ApiService } from "../../services/Api";
 import { Info } from "./components/Info/Info";
 
+export interface PersonProps {
+  name: string;
+  gender: string;
+  birth_year: string;
+  eye_color: string;
+  films: string[];
+  vehicles: string[];
+  starships: string[];
+}
+
 export function HomePage() {
   const [text, setText] = useState("");
   const [searchParams, setSearchParams] = useSearchParams();
@@ -24,7 +34,7 @@ export function HomePage() {
     queryFn: () => ApiService.getAll(filter),
   });
 
-  const handleSearch = async (e: any) => {
+  const handleSearch = async (e: FormEvent) => {
     e.preventDefault();
 
     setSearchParams((state) => {
@@ -71,7 +81,7 @@ export function HomePage() {
       ) : (
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-5 mt-3">
           {people.length > 0 ? (
-            people.map((person: any) => (
+            people.map((person: PersonProps) => (
               <li className="list-none" key={person.name}>
                 <div className="bg-white rounded-lg pb-4">
                   <div className="flex flex-col justify-between bg-yellow-500 rounded-tl-lg rounded-tr-lg pl-3 pt-3 pb-2">
@@ -100,17 +110,17 @@ export function HomePage() {
                       <Info
                         src={Movie}
                         title="FILMS"
-                        value={person.films.length}
+                        value={`${person.films.length}`}
                       />
                       <Info
                         src={Vehicle}
                         title="VEHICLES"
-                        value={person.vehicles.length}
+                        value={`${person.vehicles.length}`}
                       />
                       <Info
                         src={Starship}
                         title="STARSHIPS"
-                        value={person.starships.length}
+                        value={`${person.starships.length}`}
                       />
                     </div>
                   </div>
