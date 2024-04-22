@@ -75,7 +75,7 @@ export function HomePage() {
               <li className="list-none" key={person.name}>
                 <div className="bg-white rounded-lg pb-4">
                   <div className="flex flex-col justify-between bg-yellow-500 rounded-tl-lg rounded-tr-lg pl-3 pt-3 pb-2">
-                    <Link to={`/details/${person.name}`}>
+                    <Link to={`/swapi/details/${person.name}`}>
                       <img alt="icon" src={Card} height={16} width={16} />
                     </Link>
                     <p className="text-xl text-gray-800">{person.name}</p>

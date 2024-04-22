@@ -4,11 +4,11 @@ import { HomePage } from "../pages/Home/HomePage";
 
 export const router = createBrowserRouter([
     {
-        path: "/",
+        path: "/swapi",
         element: <HomePage />
     },
     {
-        path: "/details/:id",
+        path: "/swapi/details/:id",
         element: <DetailsPage />
     },
 ]);

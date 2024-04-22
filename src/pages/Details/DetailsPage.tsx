@@ -28,7 +28,7 @@ export function DetailsPage() {
   const [starships, setStarships] = useState<any[]>([]);
 
   //Pega o personagem selecionado baseado na URL
-  const urlName = useLocation().pathname.slice(9);
+  const urlName = useLocation().pathname.slice(15);
 
   const { data, isLoading } = useQuery({
     queryKey: ["people", urlName],
