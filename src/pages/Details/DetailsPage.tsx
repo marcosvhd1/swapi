@@ -129,7 +129,7 @@ export function DetailsPage() {
       {person ? (
         <div>
           <p className="text-base leading-4 text-gray-300 mb-4">
-            <Link to="/" className="no-underline">
+            <Link to="/swapi" className="no-underline">
               All Cards
             </Link>{" "}
             {">"} <span>{person.name} Details</span>
